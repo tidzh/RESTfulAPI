@@ -8,6 +8,12 @@ router.get("/services", (req, res)=>{
 	  res.send(services);
 	});
 });
+router.get("/service/:url", (req, res)=>{
+  ServicesController.findOne({url: req.params.url})
+	.then(services => {
+	  res.send(services);
+	});
+});
 
 
 module.exports = router;
