@@ -8,12 +8,21 @@ router.get("/services", (req, res)=>{
 	  res.send(services);
 	});
 });
-router.get("/service/:url", (req, res)=>{
+router.get("/service/:url", (req, res)=> {
   ServicesController.findOne({url: req.params.url})
 	.then(services => {
 	  res.send(services);
 	});
 });
-
+router.put("/service/:url", (req, res)=>{
+  console.log(req.body)
+  ServicesController.findOneAndUpdate({url: req.params.url}, req.body)
+	.then(() => {
+	  ServicesController.findOne({url: req.params.url})
+		.then(services => {
+		  res.send(services);
+		});
+	});
+});
 
 module.exports = router;
