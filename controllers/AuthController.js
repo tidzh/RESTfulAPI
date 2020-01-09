@@ -7,7 +7,8 @@ const withAuth = require('../middleware');
 const secret = 'mysecretsshhh';
 
 router.post('/auth', function (req, res) {
-  const {email, password} = req.body;
+  const {email, password, rememberMe} = req.body;
+  
   
   LoginController.findOne({email}, function (err, user) {
 	if (err) {
@@ -36,10 +37,11 @@ router.post('/auth', function (req, res) {
 		  // Issue token
 		  const payload = {email};
 		  const token = jwt.sign(payload, secret, {
-			expiresIn: '2h'
+			expiresIn: "1h", algorithm: 'HS256'
 		  });
-		  res.cookie('token', token, {httpOnly: true})
-			.sendStatus(200);
+		  const maxAge = rememberMe ? 31536000 : 3600;
+		  
+		  res.cookie('token', token, { maxAge, httpOnly: true }).sendStatus(200);
 		}
 	  });
 	}
