@@ -15,7 +15,8 @@ app.use("/api",
   require('./controllers/AuthController'),
   require('./controllers/SkillController'),
   require('./controllers/ServicesController'),
-  require('./controllers/FeedbackController')
+  require('./controllers/FeedbackController'),
+  require('./controllers/ReviewsController')
 );
 
 

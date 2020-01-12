@@ -39,9 +39,7 @@ router.post('/auth', function (req, res) {
 		  const token = jwt.sign(payload, secret, {
 			expiresIn: "1h", algorithm: 'HS256'
 		  });
-		  const maxAge = rememberMe ? 31536000 : 3600;
-		  
-		  res.cookie('token', token, { maxAge, httpOnly: true }).sendStatus(200);
+		  res.cookie('token', token, {httpOnly: true }).sendStatus(200);
 		}
 	  });
 	}
