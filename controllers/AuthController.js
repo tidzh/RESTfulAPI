@@ -37,9 +37,9 @@ router.post('/auth', function (req, res) {
 		  // Issue token
 		  const payload = {email};
 		  const token = jwt.sign(payload, secret, {
-			expiresIn: "1h", algorithm: 'HS256'
+			expiresIn: '1h'
 		  });
-		  res.cookie('token', token, {httpOnly: true }).sendStatus(200);
+		  res.cookie('token', token,  {httpOnly: true, maxAge: rememberMe ? 3600 * 1000 * 24 * 365: 3600 * 1000 * 24  }).sendStatus(200);
 		}
 	  });
 	}
